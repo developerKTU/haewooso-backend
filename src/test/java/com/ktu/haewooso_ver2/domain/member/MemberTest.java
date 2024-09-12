@@ -30,7 +30,7 @@ class MemberTest {
                 .uuid("uuid1")
                 .pushToken("pushToken1")
                 .lastConnectDate(LocalDateTime.now())
-                .messages(null)
+                .sendMessage(null)
                 .build();
 
         memberRepository.save(member1);
