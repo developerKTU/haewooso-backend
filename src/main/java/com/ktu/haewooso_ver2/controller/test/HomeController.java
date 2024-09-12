@@ -8,8 +8,7 @@ public class HomeController {
 
     @GetMapping("home")
     public String homeContoller(){
-        String s = "테스트 페이지 > Spring Boot 세팅 완료!";
 
-        return s;
+        return "테스트 페이지 > Spring Boot 세팅 완료!";
     }
 }
