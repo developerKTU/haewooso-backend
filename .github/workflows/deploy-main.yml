@@ -7,6 +7,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: FCM-secret-SDK-json
+        id: FCM-secret-SDK-json
+        uses: jsdaniell/create-json@v1.2.2
+        with:
+          name: "haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json"
+          json: ${{ secrets.FIREBASECLOUDMESSAGESECRETSDK }}
       - name: Checkout
         uses: actions/checkout@v2
       - name: Connect deploy key
@@ -42,11 +48,4 @@ jobs:
                 url: git@github.com:${{ github.repository }}.git
                 ref: ${{ github.ref }}
               preset: java-springboot
-      - name: FCM-secret-SDK-json
-        id: FCM-secret-SDK-json
-        uses: jsdaniell/create-json@v1.2.2
-        with:
-          name: "haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json"
-          json: ${{ secrets.FIREBASECLOUDMESSAGESECRETSDK }} > haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json
-          dir: '/'
         
