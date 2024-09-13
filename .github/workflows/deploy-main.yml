@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: FCM-secret-SDK-json
-        run: echo "${{ secrets.FIREBASECLOUDMESSAGESECRETSDK }}" > ./fcmSdk.json
+        run: |
+          echo "{\"key\": \"${{ secrets.FIREBASECLOUDMESSAGESECRETSDK }}\"}" > ./fcmSdk.json
       - name: Checkout
         uses: actions/checkout@v2
       - name: Connect deploy key
