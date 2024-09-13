@@ -22,7 +22,7 @@ public class FCMConfig {
         //ClassPathResource resource = new ClassPathResource("firebase/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
 
         // 운영
-        ClassPathResource resource = new ClassPathResource("haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
+        ClassPathResource resource = new ClassPathResource("/home/runner/work/haewooso-backend/haewooso-backend/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
 
         InputStream refreshToken = resource.getInputStream();
 
