@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 ERD/
 src/main/resources/firebase
+src/main/resources/*.yml
 
 ### STS ###
 .apt_generated
