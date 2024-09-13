@@ -16,29 +16,33 @@ import java.util.*;
 @Configuration
 public class FCMConfig {
 
-//    @Bean
-//    FirebaseMessaging firebaseMessaging() throws IOException {
-//        ClassPathResource resource = new ClassPathResource("firebase/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
-//
-//        InputStream refreshToken = resource.getInputStream();
-//
-//        FirebaseApp firebaseApp = null;
-//        List<FirebaseApp> firebaseAppList = FirebaseApp.getApps();
-//
-//        if(firebaseAppList != null && !firebaseAppList.isEmpty()){
-//            for(FirebaseApp app : firebaseAppList){
-//                if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)){
-//                    firebaseApp = app;
-//                }
-//            }
-//        }else{
-//            FirebaseOptions options = FirebaseOptions.builder()
-//                    .setCredentials(GoogleCredentials.fromStream(refreshToken))
-//                    .build();
-//
-//            firebaseApp = FirebaseApp.initializeApp(options);
-//        }
-//
-//        return FirebaseMessaging.getInstance(firebaseApp);
-//    }
+    @Bean
+    FirebaseMessaging firebaseMessaging() throws IOException {
+        // Local 환경
+        //ClassPathResource resource = new ClassPathResource("firebase/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
+
+        // 운영 환경
+        ClassPathResource resource = new ClassPathResource("haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
+
+        InputStream refreshToken = resource.getInputStream();
+
+        FirebaseApp firebaseApp = null;
+        List<FirebaseApp> firebaseAppList = FirebaseApp.getApps();
+
+        if(firebaseAppList != null && !firebaseAppList.isEmpty()){
+            for(FirebaseApp app : firebaseAppList){
+                if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)){
+                    firebaseApp = app;
+                }
+            }
+        }else{
+            FirebaseOptions options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.fromStream(refreshToken))
+                    .build();
+
+            firebaseApp = FirebaseApp.initializeApp(options);
+        }
+
+        return FirebaseMessaging.getInstance(firebaseApp);
+    }
 }
