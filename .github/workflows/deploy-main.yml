@@ -48,5 +48,4 @@ jobs:
         with:
           name: "haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json"
           json: ${{ secrets.FIREBASECLOUDMESSAGESECRETSDK }}
-          dir: 'src/main/resources/firebase/'
         
