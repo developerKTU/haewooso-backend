@@ -13,7 +13,10 @@ jobs:
         with:
             name: "haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json"
             json: ${{ secrets.FIREBASECLOUDMESSAGESECRETSDK }}
-            dir: '/app/build/classes/java/main/com/ktu/haewooso_ver2/firebase'
+            dir: '/'
+      - name: deploy JSON to server
+        run: |
+              scp -o StrictHostKeyChecking=no /home/runner/work/haewooso-backend/haewooso-backend/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json java@haewooso-backend:/app/build/classes/java/main/com/ktu/haewooso_ver2/firebase/
       - name: Checkout
         uses: actions/checkout@v2
       - name: Connect deploy key
