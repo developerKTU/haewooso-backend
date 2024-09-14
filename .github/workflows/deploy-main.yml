@@ -7,9 +7,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: deploy JSON to server
-        run: |
-              scp -o StrictHostKeyChecking=no /home/runner/work/haewooso-backend/haewooso-backend/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json java@port-0-haewooso-backend-m102oivkf1946555.sel4.cloudtype.app:/app/build/classes/java/main/com/ktu/haewooso_ver2/firebase/
       - name: Checkout
         uses: actions/checkout@v2
       - name: Connect deploy key
