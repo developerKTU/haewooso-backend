@@ -19,7 +19,7 @@ public class FCMConfig {
 //    @Bean
 //    FirebaseMessaging firebaseMessaging() throws IOException {
 //        // Local
-//        //ClassPathResource resource = new ClassPathResource("firebase/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
+//        //ClassPathResource resource = new ClassPathResource("firebase/haewooso-firebase-adminsdk-r1plg-b5fdea6348.json");
 //
 //        // 운영
 //        ClassPathResource resource = new ClassPathResource("/app/build/classes/java/main/com/ktu/haewooso_ver2/firebase/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
