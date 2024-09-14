@@ -17,7 +17,7 @@ import java.util.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseTimeEntity implements Persistable<String> {
 
-    @Id @Column(name = "member_id")
+    @Id @Column(name = "uuid")
     private String uuid;
     private String pushToken;
     private LocalDateTime lastConnectDate;

@@ -21,7 +21,7 @@ public class SendMsg {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sendUuid", referencedColumnName = "member_id", insertable = false, updatable = false)
+    @JoinColumn(name = "sendUuid", referencedColumnName = "uuid", insertable = false, updatable = false)
     private Member member;
 
     // 연관관계 메서드
