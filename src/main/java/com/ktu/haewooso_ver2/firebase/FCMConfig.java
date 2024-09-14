@@ -16,7 +16,7 @@ import java.util.*;
 @Configuration
 public class FCMConfig {
 
-    @Bean
+    /*@Bean
     FirebaseMessaging firebaseMessaging() throws IOException {
         // Local
         //ClassPathResource resource = new ClassPathResource("firebase/haewooso-firebase-adminsdk-r1plg-3e9c10ed08.json");
@@ -44,5 +44,5 @@ public class FCMConfig {
         }
 
         return FirebaseMessaging.getInstance(firebaseApp);
-    }
+    }*/
 }
