@@ -20,7 +20,7 @@ public class FCMConfig {
 
     // 운영
     @Value("${FCMSDK}")
-    static String FCMSDK;
+    private String FCMSDK;
 
     @Bean
     FirebaseMessaging firebaseMessaging() throws IOException {
