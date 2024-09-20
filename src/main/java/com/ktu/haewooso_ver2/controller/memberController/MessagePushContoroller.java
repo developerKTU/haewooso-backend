@@ -37,10 +37,10 @@ public class MessagePushContoroller {
         String ranDomReceiverUuid = FCMNotificationService.getRandomReceiverUuid(randomReceiverToken);
         messagePushDto.setReceiveUuid(ranDomReceiverUuid);
 
-        // 푸시알림 메시지 전송 성공 시, 보낸 푸시 알림 메시지 정보 insert
-        if("200".equals(result)){
-            result = FCMNotificationService.insertMessageInfomation(messagePushDto).getBody();
-        }
+//        // 푸시알림 메시지 전송 성공 시, 보낸 푸시 알림 메시지 정보 insert
+//        if("200".equals(result)){
+//            result = FCMNotificationService.insertMessageInfomation(messagePushDto).getBody();
+//        }
 
         return result;
     }
