@@ -25,7 +25,7 @@ public class MessagePushRepository {
     // 랜덤토큰 조회
     // @Query -> WHERE : uuid, SELECT : push_token
     public String findByRandomReceiverToken(String uuid){
-        return em.createQuery("SELECT m.pushToken FROM Member m WHERE m.uuid not in :uuid order by random() LIMIT 1", String.class)
+        return em.createQuery("SELECT m.pushToken FROM Member m WHERE m.uuid not in :uuid order by rand() LIMIT 1", String.class)
                 .setParameter("uuid", uuid)
                 .getSingleResult();
     }
