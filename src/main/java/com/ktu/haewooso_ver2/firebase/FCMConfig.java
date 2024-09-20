@@ -28,8 +28,6 @@ public class FCMConfig {
         //ClassPathResource resource = new ClassPathResource("firebase/haewooso-firebase-adminsdk-r1plg-b5fdea6348.json");
         //InputStream refreshToken = resource.getInputStream();
 
-        System.out.println("FCMSDK = " + FCMSDK);
-
         // 운영
         InputStream refreshToken = new ByteArrayInputStream(FCMSDK.getBytes());
 
