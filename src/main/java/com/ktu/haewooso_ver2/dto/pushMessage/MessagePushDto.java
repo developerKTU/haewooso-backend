@@ -9,7 +9,6 @@ public class MessagePushDto {
     @NotNull
     private String sendUuid;
 
-    @NotNull
     private String receiveUuid;
 
     @NotNull
