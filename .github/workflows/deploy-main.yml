@@ -37,7 +37,7 @@ jobs:
                 - name: DB_dataBaseName
                   value: haewooso
                 - name: FCMSDK
-                  token: ${{ secrets.FIREBASECLOUDMESSAGESECRETSDK }}
+                  token: "${{ secrets.FIREBASECLOUDMESSAGESECRETSDK }}"
               buildenv: []
             context:
               git:
