@@ -4,7 +4,6 @@ import com.ktu.haewooso_ver2.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -31,6 +30,7 @@ class MemberTest {
                 .pushToken("pushToken1")
                 .lastConnectDate(LocalDateTime.now())
                 .sendMessage(null)
+                .useYn("Y")
                 .build();
 
         memberRepository.save(member1);
@@ -40,6 +40,8 @@ class MemberTest {
 
         // then
         assertThat(findMember1.get().getId()).isEqualTo("uuid1");
+        // 240926 useYn 추가 test
+        assertThat(findMember1.get().getUseYn()).isEqualTo("Y");
     }
 
 }

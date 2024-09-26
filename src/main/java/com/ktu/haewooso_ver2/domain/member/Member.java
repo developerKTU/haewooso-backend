@@ -26,13 +26,16 @@ public class Member extends BaseTimeEntity implements Persistable<String> {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<SendMsg> sendMessages = new ArrayList<>();
 
+    // 240926 useYn(멤버탈퇴여부) 컬럼 추가
+    private String useYn;
 
     @Builder
-    public Member(String uuid, String pushToken, LocalDateTime lastConnectDate, SendMsg sendMessage){
+    public Member(String uuid, String pushToken, LocalDateTime lastConnectDate, SendMsg sendMessage, String useYn){
         this.uuid = uuid;
         this.pushToken = pushToken;
         this.lastConnectDate = lastConnectDate;
         this.sendMessages.add(sendMessage);
+        this.useYn = useYn;
     }
 
     @Override
