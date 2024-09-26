@@ -1,7 +1,6 @@
-package com.ktu.haewooso_ver2.controller.memberController;
+package com.ktu.haewooso_ver2.controller.messageController;
 
 import com.ktu.haewooso_ver2.dto.pushMessage.MessagePushDto;
-import com.ktu.haewooso_ver2.firebase.FCMConfig;
 import com.ktu.haewooso_ver2.service.pushMessage.FCMNotificationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name="Haewooso Message Push API", description = "해우소 앱의 푸시 메시지 알람을 보내는 API")
 @RestController
 @RequestMapping("push/")
-public class MessagePushContoroller {
+public class MessagePushController {
 
     private final FCMNotificationService FCMNotificationService;
 
     @Autowired
-    public MessagePushContoroller(FCMNotificationService FCMNotificationService){
+    public MessagePushController(FCMNotificationService FCMNotificationService){
         this.FCMNotificationService = FCMNotificationService;
     }
 
