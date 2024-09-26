@@ -31,6 +31,7 @@ public class MemberServiceImpl implements MemberService {
                     .pushToken(memberCreateDto.getPush_token())
                     .lastConnectDate(LocalDateTime.now())
                     .sendMessage(null)
+                    .useYn("Y")
                     .build();
 
             memberRepository.save(member);
