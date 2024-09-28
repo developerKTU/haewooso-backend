@@ -7,5 +7,7 @@ public interface MemberService {
 
     // 회원등록 v1
     public ResponseEntity<String> memberCreateService(MemberCreateDto memberCreateDto);
+    // 접속일자 업데이트 v1
+    public ResponseEntity<String> lastConnectUpdate(String uuid);
 
 }

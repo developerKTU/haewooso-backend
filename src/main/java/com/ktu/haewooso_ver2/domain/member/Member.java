@@ -44,6 +44,10 @@ public class Member extends BaseTimeEntity implements Persistable<String> {
         this.secretCodeMsgs.add(secretCodeMsg);
     }
 
+    public void updateLastConnectDate(){
+        this.lastConnectDate = LocalDateTime.now();
+    }
+
     @Override
     public String getId() {
         return this.uuid;
