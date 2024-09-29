@@ -67,7 +67,7 @@ public class SecretPushServiceImpl implements SecretPushService {
             return new ResponseEntity<String>("200", HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity<String>("400", HttpStatus.OK);
+            return new ResponseEntity<String>("400", HttpStatus.BAD_REQUEST);
 
         }
     }
