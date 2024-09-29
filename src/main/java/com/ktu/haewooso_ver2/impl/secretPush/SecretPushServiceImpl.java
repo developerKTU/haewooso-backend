@@ -6,6 +6,8 @@ import com.ktu.haewooso_ver2.repository.MemberRepository;
 import com.ktu.haewooso_ver2.repository.SecretPushRepository;
 import com.ktu.haewooso_ver2.service.secretPushService.SecretPushService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,16 +51,24 @@ public class SecretPushServiceImpl implements SecretPushService {
     }
 
     @Override
-    public void createSecretCodeMsg(String uuid, String result) {
-        Optional<Member> findMember = memberRepository.findByUuid(uuid);
-        System.out.println(findMember.get().getUuid());
+    public ResponseEntity<String> createSecretCodeMsg(String uuid, String result) {
+        try{
+            Optional<Member> findMember = memberRepository.findByUuid(uuid);
+            System.out.println(findMember.get().getUuid());
 
-        SecretCodeMsg secretCodeMsg = SecretCodeMsg.builder()
-                .id(result)
-                .uuid(findMember.get().getUuid())
-                .useYn("Y")
-                .build();
+            SecretCodeMsg secretCodeMsg = SecretCodeMsg.builder()
+                    .id(result)
+                    .uuid(findMember.get().getUuid())
+                    .useYn("Y")
+                    .build();
 
-        secretPushRepository.save(secretCodeMsg);
+            secretPushRepository.save(secretCodeMsg);
+
+            return new ResponseEntity<String>("200", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<String>("400", HttpStatus.OK);
+
+        }
     }
 }

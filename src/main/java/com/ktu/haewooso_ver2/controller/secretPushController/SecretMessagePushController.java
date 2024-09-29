@@ -31,7 +31,8 @@ public class SecretMessagePushController {
         System.out.println(requestUuid.get("uuid"));
         String result = secretPushService.createRandomCode();
 
-        secretPushService.createSecretCodeMsg(requestUuid.get("uuid"), result);
+        String resultStatus = secretPushService.createSecretCodeMsg(requestUuid.get("uuid"), result).getBody();
+        System.out.println("===== resultStatus ===== : " + resultStatus);
 
         return result;
     }
