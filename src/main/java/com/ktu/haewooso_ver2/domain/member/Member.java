@@ -1,6 +1,7 @@
 package com.ktu.haewooso_ver2.domain.member;
 
 import com.ktu.haewooso_ver2.domain.auditing.BaseTimeEntity;
+import com.ktu.haewooso_ver2.domain.pushMessage.SecretCodeMsg;
 import com.ktu.haewooso_ver2.domain.pushMessage.SendMsg;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -29,13 +30,22 @@ public class Member extends BaseTimeEntity implements Persistable<String> {
     // 240926 useYn(멤버탈퇴여부) 컬럼 추가
     private String useYn;
 
+    // 240928 시크릿 푸시 기능 컬럼 추가
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<SecretCodeMsg> secretCodeMsgs = new ArrayList<>();
+
     @Builder
-    public Member(String uuid, String pushToken, LocalDateTime lastConnectDate, SendMsg sendMessage, String useYn){
+    public Member(String uuid, String pushToken, LocalDateTime lastConnectDate, SendMsg sendMessage, String useYn, SecretCodeMsg secretCodeMsg){
         this.uuid = uuid;
         this.pushToken = pushToken;
         this.lastConnectDate = lastConnectDate;
         this.sendMessages.add(sendMessage);
         this.useYn = useYn;
+        this.secretCodeMsgs.add(secretCodeMsg);
+    }
+
+    public void updateLastConnectDate(){
+        this.lastConnectDate = LocalDateTime.now();
     }
 
     @Override

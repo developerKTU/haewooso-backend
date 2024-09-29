@@ -1,6 +1,8 @@
 package com.ktu.haewooso_ver2.domain.member;
 
 import com.ktu.haewooso_ver2.repository.MemberRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,11 +17,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 class MemberTest {
 
+    @PersistenceContext
+    EntityManager em;
+
     private final MemberRepository memberRepository;
 
     @Autowired
-    public MemberTest(MemberRepository memberRepository){
+    public MemberTest(MemberRepository memberRepository, EntityManager em){
         this.memberRepository = memberRepository;
+        this.em = em;
     }
 
     @Test
@@ -34,6 +40,7 @@ class MemberTest {
                 .build();
 
         memberRepository.save(member1);
+        em.flush();
 
         // when
         Optional<Member> findMember1 = memberRepository.findByUuid("uuid1");

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -40,6 +41,20 @@ public class MemberServiceImpl implements MemberService {
         }catch (Exception e){
             e.printStackTrace();
 
+            return new ResponseEntity<String>("400", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> lastConnectUpdate(String uuid) {
+        try{
+            Optional<Member> findMember = memberRepository.findByUuid(uuid);
+
+            findMember.get().updateLastConnectDate();
+
+            return new ResponseEntity<String>("200", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
             return new ResponseEntity<String>("400", HttpStatus.BAD_REQUEST);
         }
     }
