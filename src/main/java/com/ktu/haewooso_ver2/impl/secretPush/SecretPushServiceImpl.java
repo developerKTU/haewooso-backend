@@ -71,4 +71,9 @@ public class SecretPushServiceImpl implements SecretPushService {
 
         }
     }
+
+    @Override
+    public String findPushTokenBySecretCode(String receiveSecretCode) {
+        return secretPushRepository.findSecretReceiveTokenBySecretCode(receiveSecretCode);
+    }
 }
