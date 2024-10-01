@@ -20,5 +20,13 @@ public class SecretPushRepository {
 
     // 토큰 조회
     // @Query -> WHERE : uuid, SELECT : push_token
-
+    public String findSecretReceiveTokenBySecretCode(String secretCode){
+        return em.createQuery("select m.pushToken " +
+                            "     from Member m " +
+                            "     left outer join SecretCodeMsg s" +
+                            "       on m.uuid = s.secretUuid" +
+                            "    where s.id = :secretCode", String.class)
+                .setParameter("secretCode", secretCode)
+                .getSingleResult();
+    }
 }

@@ -24,22 +24,26 @@ public class MessagePushController {
 
     @Operation(summary = "랜덤유저에게 메시지 PUSH하는 API", description = "**랜덤 토큰 값을 조회하여 랜덤 사용자에게 푸시알림을 보내는 API**" +
             "\n\n**_<<필요 파라미터>>_**" +
-            "\n\n _sendUuid_\n\n_receiveUuid_\n\n_title_\n\ncontent")
+            "\n\n _sendUuid_\n\n_receiveUuid(null 또는 보낼 필요 없음)_\n\n_title_\n\ncontent")
     @PostMapping("api/v1")
     public String pushMessageRandomUser(@RequestBody MessagePushDto messagePushDto){
 
         // 랜덤토큰 조회
         String randomReceiverToken = FCMNotificationService.getRandomReceiverToken(messagePushDto.getSendUuid());
+        System.out.println("=== randomReceiverToken === : " + randomReceiverToken);
 
         // 푸시알림 send
         String result = FCMNotificationService.sendNotificationByToken(messagePushDto, randomReceiverToken).getBody();
-        String ranDomReceiverUuid = FCMNotificationService.getRandomReceiverUuid(randomReceiverToken);
-        messagePushDto.setReceiveUuid(ranDomReceiverUuid);
+        // 수신자 uuid 조회
+        String randomReceiverUuid = FCMNotificationService.getReceiverUuid(randomReceiverToken);
+        messagePushDto.setReceiveUuid(randomReceiverUuid);
 
-//        // 푸시알림 메시지 전송 성공 시, 보낸 푸시 알림 메시지 정보 insert
-//        if("200".equals(result)){
-//            result = FCMNotificationService.insertMessageInfomation(messagePushDto).getBody();
-//        }
+        // 푸시알림 메시지 전송 성공 시, 보낸 푸시 알림 메시지 정보 insert
+        if("200".equals(result)){
+            // 시크릿 푸시 구분코드 생성 (랜덤 푸시 : R)
+            String secretAt = "R";
+            result = FCMNotificationService.insertMessageInfomation(messagePushDto, secretAt).getBody();
+        }
 
         return result;
     }

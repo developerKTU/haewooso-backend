@@ -8,6 +8,7 @@ import com.ktu.haewooso_ver2.domain.pushMessage.SendMsg;
 import com.ktu.haewooso_ver2.dto.pushMessage.MessagePushDto;
 import com.ktu.haewooso_ver2.repository.MessagePushRepository;
 import com.ktu.haewooso_ver2.service.pushMessage.FCMNotificationService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
+@Transactional
 public class FCMNotificationServiceImpl implements FCMNotificationService {
     private final MessagePushRepository messagePushRepository;
     private final FirebaseMessaging firebaseMessaging;
@@ -37,9 +39,9 @@ public class FCMNotificationServiceImpl implements FCMNotificationService {
         }
     }
 
-    /* 랜덤으로 조회한 푸시토큰을 가지고 있는 UUID 조회 */
+    /* 푸시 알림 수신자의 UUID 조회 */
     @Override
-    public String getRandomReceiverUuid(String pushToken) {
+    public String getReceiverUuid(String pushToken) {
         try{
             String uuidOfRendomToken = messagePushRepository.findByUuidOfRandomPushToken(pushToken);
             return uuidOfRendomToken;
@@ -50,7 +52,7 @@ public class FCMNotificationServiceImpl implements FCMNotificationService {
     }
 
     @Override
-    public ResponseEntity<String> sendNotificationByToken(MessagePushDto messagePushDto, String randomReceiverToken) {
+    public ResponseEntity<String> sendNotificationByToken(MessagePushDto messagePushDto, String receiverToken) {
 
         Notification notification = Notification.builder()
                 .setTitle(messagePushDto.getTitle())
@@ -58,7 +60,7 @@ public class FCMNotificationServiceImpl implements FCMNotificationService {
                 .build();
 
         Message message = Message.builder()
-                .setToken(randomReceiverToken)
+                .setToken(receiverToken)
                 .setNotification(notification)
                 .build();
 
@@ -72,13 +74,14 @@ public class FCMNotificationServiceImpl implements FCMNotificationService {
     }
 
     @Override
-    public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto) {
+    public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto, String secretAt) {
         try{
             SendMsg sendMsg = SendMsg.builder()
                     .sendUuid(messagePushDto.getSendUuid())
                     .receiveUuid(messagePushDto.getReceiveUuid())
                     .title(messagePushDto.getTitle())
                     .content(messagePushDto.getContent())
+                    .secretAt(secretAt)
                     .build();
             messagePushRepository.save(sendMsg);
             System.out.println("sendMsg = " + sendMsg.toString());

@@ -7,8 +7,8 @@ public interface FCMNotificationService {
 
     // 랜덤토큰 조회
     public String getRandomReceiverToken(String uuid);
-    public String getRandomReceiverUuid(String pushToken);
+    public String getReceiverUuid(String pushToken);
     public ResponseEntity<String> sendNotificationByToken(MessagePushDto messagePushDto, String randomReceiverToken);
-    public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto);
+    public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto, String secretAt);
 
 }

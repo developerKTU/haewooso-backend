@@ -11,6 +11,9 @@ public class MessagePushDto {
 
     private String receiveUuid;
 
+    // 시크릿 푸시 알림을 보내기 위한 시크릿코드
+    private String secretCode;
+
     @NotNull
     private String title;
 
