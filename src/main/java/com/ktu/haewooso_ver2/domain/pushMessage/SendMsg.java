@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SendMsg {
 
-    @Id @GeneratedValue
+    @Id @SequenceGenerator(name = "send_msg_SEQ_GENERATOR", sequenceName = "send_msg_seq", allocationSize = 1)
     @Column(name = "send_board_sno")
     private int id;
     private String sendUuid;
