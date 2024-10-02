@@ -50,6 +50,7 @@ public class SecretMessagePushController {
         // 해당 시크릿 코드를 가지고 있는 수신자의 푸시토큰 조회
         String receiveSecretCode = messagePushDto.getSecretCode();
         String secretMessageReceiveToken = secretPushService.findPushTokenBySecretCode(receiveSecretCode);
+        System.out.println("=== receiveSecretCode === : " + receiveSecretCode);
         System.out.println("=== secretMessageReceiveToken === : " + secretMessageReceiveToken);
 
         // 시크릿 푸시 메시지 send
