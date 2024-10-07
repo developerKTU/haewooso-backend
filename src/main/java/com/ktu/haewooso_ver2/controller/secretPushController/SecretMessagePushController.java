@@ -1,5 +1,6 @@
 package com.ktu.haewooso_ver2.controller.secretPushController;
 
+import com.ktu.haewooso_ver2.dto.count.ByUuid.RequestByUuidDto;
 import com.ktu.haewooso_ver2.dto.pushMessage.MessagePushDto;
 import com.ktu.haewooso_ver2.service.pushMessage.FCMNotificationService;
 import com.ktu.haewooso_ver2.service.secretPushService.SecretPushService;
@@ -8,8 +9,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 
 @Tag(name="Haewooso Secret Message Push API", description = "해우소 앱의 특정 상대만 푸시 메시지 알람을 보내는 API")
 @RestController
@@ -25,18 +24,26 @@ public class SecretMessagePushController {
         this.FCMNotificationService = FCMNotificationService;
     }
 
-    @Operation(summary = "시크릿 코드 생성 후 데이터 INSERT API v1", description="**시크릿 코드 생성 및 해당 시크릿 푸시 정보를 INSERT하는 API**\n\n_<<uuid : 시크릿코드를 생성한 유저의 uuid>>_\n\n")
+    @Operation(summary = "시크릿 코드 생성 후 데이터 INSERT API v1", description="**시크릿 코드 생성 및 해당 시크릿 푸시 정보를 INSERT하는 API**" +
+            "\n\n**_<<필요 파라미터>>_**\n\n" +
+            "\n\nuuid : 시크릿코드를 생성한 유저의 uuid\n\n\n" +
+            "\n\n\n**_<<HTTP 상태 코드>>_**\n\n" +
+            "\n\n200 : SUCCESS\n\n" +
+            "\n\n400 : BAD REQUEST\n\n")
     @PostMapping("create/secret_code/api/v1")
-    public String creteRandomSecretCode(@RequestBody HashMap<String, String> requestUuid){
-        System.out.println(requestUuid.get("uuid"));
+    public String creteRandomSecretCode(@RequestBody RequestByUuidDto requestByUuidDto){
+        String requestId = requestByUuidDto.getUuid();
+        System.out.println("===== requestId ===== : " + requestId);
+
         String result = secretPushService.createRandomCode();
 
-        String resultStatus = secretPushService.createSecretCodeMsg(requestUuid.get("uuid"), result).getBody();
+        String resultStatus = secretPushService.createSecretCodeMsg(requestId, result).getBody();
         System.out.println("===== resultStatus ===== : " + resultStatus);
 
+        // @Code 200 success
+        // @Code 400 bad_request
         return result;
     }
-
     @Operation(summary = "시크릿 코드를 가진 유저에게 푸시 메시지를 보내는 API v1", description="**시크릿 코드를 가진 유저에게 푸시 메시지를 보내는 API**"
                                                                                         +"\n\n**_<<필요 파라미터>>_**"
                                                                                         +"\n\n_<<sendUuid : 시크릿 푸시 메시지를 보내는 유저의 uuid(발신자)>>_\n\n"

@@ -4,6 +4,7 @@ import com.ktu.haewooso_ver2.domain.member.Member;
 import com.ktu.haewooso_ver2.domain.pushMessage.SecretCodeMsg;
 import com.ktu.haewooso_ver2.repository.MemberRepository;
 import com.ktu.haewooso_ver2.repository.SecretPushRepository;
+import com.ktu.haewooso_ver2.repository.jpaRepository.SecretPushJpaRepository;
 import com.ktu.haewooso_ver2.service.secretPushService.SecretPushService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -19,11 +21,13 @@ import java.util.Optional;
 public class SecretPushServiceImpl implements SecretPushService {
 
     private final SecretPushRepository secretPushRepository;
+    private final SecretPushJpaRepository secretPushJpaRepository;
     private final MemberRepository memberRepository;
 
     @Autowired
-    public SecretPushServiceImpl(SecretPushRepository secretPushRepository, MemberRepository memberRepository){
+    public SecretPushServiceImpl(SecretPushRepository secretPushRepository, SecretPushJpaRepository secretPushJpaRepository, MemberRepository memberRepository){
         this.secretPushRepository = secretPushRepository;
+        this.secretPushJpaRepository = secretPushJpaRepository;
         this.memberRepository = memberRepository;
     }
 
@@ -54,7 +58,6 @@ public class SecretPushServiceImpl implements SecretPushService {
     public ResponseEntity<String> createSecretCodeMsg(String uuid, String result) {
         try{
             Optional<Member> findMember = memberRepository.findByUuid(uuid);
-            System.out.println(findMember.get().getUuid());
 
             SecretCodeMsg secretCodeMsg = SecretCodeMsg.builder()
                     .id(result)
@@ -62,7 +65,9 @@ public class SecretPushServiceImpl implements SecretPushService {
                     .useYn("Y")
                     .build();
 
-            secretPushRepository.save(secretCodeMsg);
+            LocalDateTime nowDate = LocalDateTime.now();
+
+            secretPushJpaRepository.upsertSecretCode(secretCodeMsg.getId(), secretCodeMsg.getSecretUuid(), secretCodeMsg.getUseYn(), nowDate, nowDate);
 
             return new ResponseEntity<String>("200", HttpStatus.OK);
         }catch (Exception e){
