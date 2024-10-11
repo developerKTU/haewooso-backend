@@ -24,7 +24,9 @@ public class BoardController {
 
     @Operation(summary = "나에게 메시지를 보낸 사용자의 UUID 조회 API v1", description="**나에게 메시지를 보낸 사용자의 UUID 조회하는 API**"
             +"\n\n**_<<필요 파라미터>>_**"
-            +"\n\n_<<세션으로 가져온 본인의 UUID 사용 (파라미터 X)>>_\n\n")
+            +"\n\n_<<세션으로 가져온 본인의 UUID 사용 (파라미터 X)>>_\n\n"
+            +"\n\n**_※ 참고_**"
+            +"\n\n_마지막 접속일 업데이트 API가 먼저 호출되어야 이 API도 호출됨_")
     @GetMapping("get_send_me_uuid/api/v1")
     public List<String> getMyBoardList(HttpSession session){
         String myUUID = (String) session.getAttribute("myUUID");
@@ -35,7 +37,9 @@ public class BoardController {
 
     @Operation(summary = "해당 사용자에게 받은 메시지 내역 조회 API v1", description="**해당 사용자에게 받은 메시지 내역을 조회하는 API**"
             +"\n\n**_<<필요 파라미터 (pathParameter)>>_**"
-            +"\n\n_<<uuid : 자신에게 메시지를 보낸 사용자 중 한 명의 UUID 선택>>_\n\n")
+            +"\n\n_<<uuid : 자신에게 메시지를 보낸 사용자 중 한 명의 UUID 선택>>_\n\n"
+            +"\n\n**_※ 참고_**"
+            +"\n\n_get_send_me_uuid API가 정상적으로 호출 되어야 이 API도 정상 호출됨_")
     @GetMapping("get_receive_message_info/api/v1/{uuid}")
     public List<MessageBoardDto> getSendMeBoardList(@PathVariable String uuid){
         System.out.println("myUUID = " + uuid);
