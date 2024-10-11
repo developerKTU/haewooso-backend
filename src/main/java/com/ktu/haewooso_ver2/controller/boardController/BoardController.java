@@ -26,7 +26,7 @@ public class BoardController {
             +"\n\n**_<<필요 파라미터>>_**"
             +"\n\n_<<세션으로 가져온 본인의 UUID 사용 (파라미터 X)>>_\n\n"
             +"\n\n**_※ 참고_**"
-            +"\n\n_마지막 접속일 업데이트 API가 먼저 호출되어야함. 이 API도 호출됨_")
+            +"\n\n_마지막 접속일 업데이트 API가 먼저 호출되어야 이 API도 호출됨_")
     @GetMapping("get_send_me_uuid/api/v1")
     public List<String> getMyBoardList(HttpSession session){
         String myUUID = (String) session.getAttribute("myUUID");
