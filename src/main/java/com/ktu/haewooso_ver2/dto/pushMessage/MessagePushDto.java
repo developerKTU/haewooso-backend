@@ -2,8 +2,10 @@ package com.ktu.haewooso_ver2.dto.pushMessage;
 
 import com.google.firebase.database.annotations.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class MessagePushDto {
 
     @NotNull
@@ -19,7 +21,5 @@ public class MessagePushDto {
 
     // 랜덤 및 시크릿 푸시 여부
     private String secretAt;
-
-    public MessagePushDto(){}
 
 }

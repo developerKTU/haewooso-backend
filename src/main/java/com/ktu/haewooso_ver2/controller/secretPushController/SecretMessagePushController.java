@@ -1,7 +1,6 @@
 package com.ktu.haewooso_ver2.controller.secretPushController;
 
 import com.ktu.haewooso_ver2.dto.count.ByUuid.RequestByUuidDto;
-import com.ktu.haewooso_ver2.dto.pushMessage.MessagePushDto;
 import com.ktu.haewooso_ver2.dto.pushMessage.SecretPushDto;
 import com.ktu.haewooso_ver2.service.pushMessage.FCMNotificationService;
 import com.ktu.haewooso_ver2.service.secretPushService.SecretPushService;
