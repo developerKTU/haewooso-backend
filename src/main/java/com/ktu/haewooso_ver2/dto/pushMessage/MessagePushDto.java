@@ -11,13 +11,15 @@ public class MessagePushDto {
 
     private String receiveUuid;
 
-    // 시크릿 푸시 알림을 보내기 위한 시크릿코드
-    private String secretCode;
-
     @NotNull
     private String title;
 
     @NotNull
     private String content;
+
+    // 랜덤 및 시크릿 푸시 여부
+    private String secretAt;
+
+    public MessagePushDto(){}
 
 }

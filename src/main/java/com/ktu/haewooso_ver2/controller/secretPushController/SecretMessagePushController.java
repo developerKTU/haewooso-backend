@@ -2,6 +2,7 @@ package com.ktu.haewooso_ver2.controller.secretPushController;
 
 import com.ktu.haewooso_ver2.dto.count.ByUuid.RequestByUuidDto;
 import com.ktu.haewooso_ver2.dto.pushMessage.MessagePushDto;
+import com.ktu.haewooso_ver2.dto.pushMessage.SecretPushDto;
 import com.ktu.haewooso_ver2.service.pushMessage.FCMNotificationService;
 import com.ktu.haewooso_ver2.service.secretPushService.SecretPushService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,25 +53,25 @@ public class SecretMessagePushController {
                                                                                         +"\n\n_<<title : 시크릿 푸시 메시지의 제목>>_\n\n"
                                                                                         +"\n\n_<<content : 시크릿 푸시 메시지의 내용>>_\n\n")
     @PostMapping("push/secret/api/v1")
-    public String pushSecretMessageUser(@RequestBody @Valid MessagePushDto messagePushDto){
+    public String pushSecretMessageUser(@RequestBody @Valid SecretPushDto secretPushDto){
 
         // 해당 시크릿 코드를 가지고 있는 수신자의 푸시토큰 조회
-        String receiveSecretCode = messagePushDto.getSecretCode();
+        String receiveSecretCode = secretPushDto.getSecretCode();
         String secretMessageReceiveToken = secretPushService.findPushTokenBySecretCode(receiveSecretCode);
         System.out.println("=== receiveSecretCode === : " + receiveSecretCode);
         System.out.println("=== secretMessageReceiveToken === : " + secretMessageReceiveToken);
 
         // 시크릿 푸시 메시지 send
-        String result = FCMNotificationService.sendNotificationByToken(messagePushDto, secretMessageReceiveToken).getBody();
+        String result = FCMNotificationService.sendNotificationByToken(secretPushDto, secretMessageReceiveToken).getBody();
         // 수신자 uuid 조회
         String receiverUuid = FCMNotificationService.getReceiverUuid(secretMessageReceiveToken);
-        messagePushDto.setReceiveUuid(receiverUuid);
+        secretPushDto.setReceiveUuid(receiverUuid);
 
         // 푸시알림 메시지 전송 성공 시, 보낸 푸시 알림 메시지 정보 insert
         if("200".equals(result)){
             // 시크릿 푸시 구분코드 생성 (랜덤 푸시 : R)
             String secretYn = "S";
-            result = FCMNotificationService.insertMessageInfomation(messagePushDto, secretYn).getBody();
+            result = FCMNotificationService.insertMessageInfomation(secretPushDto, secretYn).getBody();
         }
 
         return result;
