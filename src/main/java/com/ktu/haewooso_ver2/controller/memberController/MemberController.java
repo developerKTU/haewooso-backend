@@ -4,6 +4,7 @@ import com.ktu.haewooso_ver2.dto.member.MemberCreateDto;
 import com.ktu.haewooso_ver2.service.member.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,12 @@ public class MemberController {
 
     @Operation(summary = "회원 접속일자 업데이트 API v1", description="**어플에 접속한 회원의 접속일자를 UPDATE하는 API**\n\n_<<uuid : 접속일자 업데이트 대상 uuid>>_\n\n")
     @PatchMapping("v1/update_connect_date")
-    public String updateConnectDate(@RequestBody HashMap<String, String> requestUuid){
-        String result = memberService.lastConnectUpdate(requestUuid.get("uuid")).getBody();
+    public String updateConnectDate(@RequestBody HashMap<String, String> requestUuid, HttpSession session){
+        String uuid = requestUuid.get("uuid");
+        String result = memberService.lastConnectUpdate(uuid).getBody();
+
+        session.setAttribute("myUUID", uuid);
+        session.setMaxInactiveInterval(24 * 60 * 60);   // 세션 만료 시간을 24시간으로 설정
 
         return result;
     }
