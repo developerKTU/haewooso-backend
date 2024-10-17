@@ -20,10 +20,11 @@
 💡 Firebase Admin SDK 비공개키는 보안상의 문제로 깃헙에 푸시하지 않음. -> 운영 환경은 깃헙 시크릿으로 SDK 등록
 
 ### 📌 HAEWOOSO
-![haewooso1](https://github.com/user-attachments/assets/8e132417-18a8-49f1-974f-1dd968266ab5)
-![haewooso2](https://github.com/user-attachments/assets/96ff014f-5eec-4c10-8ed1-4d8935053fdb)
+![p1](https://github.com/user-attachments/assets/4bc96649-e3c6-4142-a265-e63f431dd1c4)
+![p2](https://github.com/user-attachments/assets/b0a88566-3cb0-4596-b6c9-a09d45ca6344)
 <br>
 <br>
-![haewooso3](https://github.com/user-attachments/assets/31540d88-a70f-44bf-bb3d-5c8c179a8d58)
+![p3](https://github.com/user-attachments/assets/4f0c3716-a9ca-4ab1-b0a2-3a36a3584ad0)
+![p4](https://github.com/user-attachments/assets/45ed2721-3e2d-47dc-9511-c2bf37761515)
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=BDBDC8&height=150&section=footer" />
