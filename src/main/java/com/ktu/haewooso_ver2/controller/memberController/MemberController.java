@@ -26,14 +26,14 @@ public class MemberController {
 
     @Operation(summary = "회원 등록 API v1", description="**신규 유저 등록 API (기능 구현을 위해 v1은 인증/인가 X)**\n\n_<<uuid : 회원ID>>_\n\n" +
                                             "_<<push_token : push 알림을 받을 고유 토큰값>>_\n\n")
-    @PostMapping("v1/createuser")
+    @PostMapping("v1/user")
     public String createUserV1(@RequestBody @Valid MemberCreateDto memberCreateDto){
 
         return memberService.memberCreateService(memberCreateDto).getBody();
     }
 
     @Operation(summary = "회원 접속일자 업데이트 API v1", description="**어플에 접속한 회원의 접속일자를 UPDATE하는 API**\n\n_<<uuid : 접속일자 업데이트 대상 uuid>>_\n\n")
-    @PatchMapping("v1/update_connect_date")
+    @PatchMapping("v1/last-connect-date")
     public String updateConnectDate(@RequestBody HashMap<String, String> requestUuid, HttpSession session){
         String uuid = requestUuid.get("uuid");
         String result = memberService.lastConnectUpdate(uuid).getBody();

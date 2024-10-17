@@ -29,7 +29,7 @@ public class BoardController {
             +"\n\n_<<세션으로 가져온 본인의 UUID 사용 (파라미터 X)>>_\n\n"
             +"\n\n**_※ 참고_**"
             +"\n\n_마지막 접속일 업데이트 API가 먼저 호출되어야 이 API도 호출됨_")
-    @GetMapping("get_send_me_uuid/api/v1")
+    @GetMapping("v1/uuids")
     public List<String> getMyBoardList(HttpSession session){
         String myUUID = (String) session.getAttribute("myUUID");
         System.out.println("myUUID = " + myUUID);
@@ -42,11 +42,12 @@ public class BoardController {
             +"\n\n_<<uuid : 자신에게 메시지를 보낸 사용자 중 한 명의 UUID 선택>>_\n\n"
             +"\n\n**_※ 참고_**"
             +"\n\n_get_send_me_uuid API가 정상적으로 호출 되어야 이 API도 정상 호출됨_"
+            +"\n\n_스웨거에서 API 테스트 시, pageable 파라미터에서 sort 부분은 지우고 테스트 하기!_"
             +"\n\n**_<<API 호출 가이드>>_**"
             +"\n\n_BASEURL/board/get_receive_message_info/api/v1/uuid1?page=0&size=3_"
             +"\n\n_page : 현재 페이지 번호_"
             +"\n\n_size : 한 페이지 당 보여질 컨텐츠의 수_")
-    @GetMapping("get_receive_message_info/api/v1/{uuid}")
+    @GetMapping("v1/messages-info/{uuid}")
     public Page<MessageBoardDto> getSendMeBoardList(Pageable pageable, @PathVariable String uuid){
         return messageBoardService.getMyBoardList(uuid, pageable);
     }
