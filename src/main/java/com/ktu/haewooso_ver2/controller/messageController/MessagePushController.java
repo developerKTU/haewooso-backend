@@ -25,7 +25,7 @@ public class MessagePushController {
     @Operation(summary = "랜덤유저에게 메시지 PUSH하는 API", description = "**랜덤 토큰 값을 조회하여 랜덤 사용자에게 푸시알림을 보내는 API**" +
             "\n\n**_<<필요 파라미터>>_**" +
             "\n\n _sendUuid_\n\n_receiveUuid(null 또는 보낼 필요 없음)_\n\n_title_\n\ncontent")
-    @PostMapping("api/v1")
+    @PostMapping("v1/send")
     public String pushMessageRandomUser(@RequestBody MessagePushDto messagePushDto){
 
         // 랜덤토큰 조회

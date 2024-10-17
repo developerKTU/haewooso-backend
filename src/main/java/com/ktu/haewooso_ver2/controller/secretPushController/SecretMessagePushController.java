@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name="Haewooso Secret Message Push API", description = "해우소 앱의 특정 상대만 푸시 메시지 알람을 보내는 API")
 @RestController
-@RequestMapping("/")
+@RequestMapping("secret/")
 public class SecretMessagePushController {
 
     private final SecretPushService secretPushService;
@@ -30,7 +30,7 @@ public class SecretMessagePushController {
             "\n\n\n**_<<HTTP 상태 코드>>_**\n\n" +
             "\n\n200 : SUCCESS\n\n" +
             "\n\n400 : BAD REQUEST\n\n")
-    @PostMapping("create/secret_code/api/v1")
+    @PostMapping("v1/secret-code")
     public String creteRandomSecretCode(@RequestBody RequestByUuidDto requestByUuidDto){
         String requestId = requestByUuidDto.getUuid();
         System.out.println("===== requestId ===== : " + requestId);
@@ -51,7 +51,7 @@ public class SecretMessagePushController {
                                                                                         +"\n\n_<<secretCode : 푸시 알림을 받을 유저의 시크릿 코드 (수신자)>>_\n\n"
                                                                                         +"\n\n_<<title : 시크릿 푸시 메시지의 제목>>_\n\n"
                                                                                         +"\n\n_<<content : 시크릿 푸시 메시지의 내용>>_\n\n")
-    @PostMapping("push/secret/api/v1")
+    @PostMapping("v1/send")
     public String pushSecretMessageUser(@RequestBody @Valid SecretPushDto secretPushDto){
 
         // 해당 시크릿 코드를 가지고 있는 수신자의 푸시토큰 조회
