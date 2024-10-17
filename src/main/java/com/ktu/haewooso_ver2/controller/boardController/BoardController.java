@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -39,11 +41,13 @@ public class BoardController {
             +"\n\n**_<<필요 파라미터 (pathParameter)>>_**"
             +"\n\n_<<uuid : 자신에게 메시지를 보낸 사용자 중 한 명의 UUID 선택>>_\n\n"
             +"\n\n**_※ 참고_**"
-            +"\n\n_get_send_me_uuid API가 정상적으로 호출 되어야 이 API도 정상 호출됨_")
+            +"\n\n_get_send_me_uuid API가 정상적으로 호출 되어야 이 API도 정상 호출됨_"
+            +"\n\n**_<<API 호출 가이드>>_**"
+            +"\n\n_BASEURL/board/get_receive_message_info/api/v1/uuid1?page=0&size=3_"
+            +"\n\n_page : 현재 페이지 번호_"
+            +"\n\n_size : 한 페이지 당 보여질 컨텐츠의 수_")
     @GetMapping("get_receive_message_info/api/v1/{uuid}")
-    public List<MessageBoardDto> getSendMeBoardList(@PathVariable String uuid){
-        System.out.println("myUUID = " + uuid);
-
-        return messageBoardService.getMyBoardList(uuid);
+    public Page<MessageBoardDto> getSendMeBoardList(Pageable pageable, @PathVariable String uuid){
+        return messageBoardService.getMyBoardList(uuid, pageable);
     }
 }

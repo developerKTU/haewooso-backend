@@ -4,6 +4,8 @@ import com.ktu.haewooso_ver2.dto.board.MessageBoardDto;
 import com.ktu.haewooso_ver2.repository.jpaRepository.MessageBoardJpaRepository;
 import com.ktu.haewooso_ver2.service.board.MessageBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +28,7 @@ public class MessageBoardServiceImpl implements MessageBoardService {
     }
 
     @Override
-    public List<MessageBoardDto> getMyBoardList(String myUUID) {
-        return messageBoardJpaRepository.getMyBoardList(myUUID);
+    public Page<MessageBoardDto> getMyBoardList(String myUUID, Pageable pageable) {
+        return messageBoardJpaRepository.getMyBoardList(myUUID, pageable);
     }
 }
