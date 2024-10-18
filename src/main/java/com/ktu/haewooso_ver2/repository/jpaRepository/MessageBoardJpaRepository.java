@@ -15,14 +15,17 @@ public interface MessageBoardJpaRepository extends JpaRepository<SendMsg, Long> 
     @Query("select s.sendUuid from SendMsg s where s.sendUuid not in (:myUUID) and s.receiveUuid = :myUUID group by s.sendUuid")
     List<String> getSendMeUuidList(@Param("myUUID") String myUUID);
 
-    @Query(value = "select send_board_sno as id" +
-                   "     , title as title" +
-                   "     , content as content" +
-                   "     , secret_at as secretAt" +
-                   "  from haewooso.send_msg" +
-                   " where send_uuid not in (:myUUID)" +
-                   "   and receive_uuid = :myUUID" +
-                   " order by secret_at"
+    @Query(value = "select a.send_board_sno as id" +
+                   "     , b.secret_code as secretCode" +
+                   "     , a.title as title" +
+                   "     , a.content as content" +
+                   "     , a.secret_at as secretAt" +
+                   "  from haewooso.send_msg a" +
+                   "  left outer join haewooso.secret_code_msg b" +
+                   "    on a.send_uuid = b.secret_uuid" +
+                   " where a.send_uuid not in (:myUUID)" +
+                   "   and a.receive_uuid = :myUUID" +
+                   " order by a.secret_at"
             , countQuery = "select count(*)" +
                            "  from haewooso.send_msg" +
                            " where send_uuid not in (:myUUID)" +
