@@ -23,7 +23,7 @@ public interface MessageBoardJpaRepository extends JpaRepository<SendMsg, Long> 
                    "  from haewooso.send_msg a" +
                    "  left outer join haewooso.secret_code_msg b" +
                    "    on a.send_uuid = b.secret_uuid" +
-                   " where a.send_uuid not in (:myUUID)" +
+                   " where a.send_uuid = :sendUUID" +
                    "   and a.receive_uuid = :myUUID" +
                    " order by a.secret_at"
             , countQuery = "select count(*)" +
@@ -31,6 +31,6 @@ public interface MessageBoardJpaRepository extends JpaRepository<SendMsg, Long> 
                            " where send_uuid not in (:myUUID)" +
                            "   and receive_uuid = :myUUID"
             , nativeQuery = true)
-    Page<MessageBoardDto> getMyBoardList(@Param("myUUID") String myUUID, Pageable pageable);
+    Page<MessageBoardDto> getMyBoardList(@Param("myUUID") String myUUID, @Param("sendUUID") String sendUUID, Pageable pageable);
 
 }

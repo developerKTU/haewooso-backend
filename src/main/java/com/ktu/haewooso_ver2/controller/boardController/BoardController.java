@@ -39,7 +39,7 @@ public class BoardController {
 
     @Operation(summary = "해당 사용자에게 받은 메시지 내역 조회 API v1", description="**해당 사용자에게 받은 메시지 내역을 조회하는 API**"
             +"\n\n**_<<필요 파라미터 (pathParameter)>>_**"
-            +"\n\n_<<uuid : 자신에게 메시지를 보낸 사용자 중 한 명의 UUID 선택>>_\n\n"
+            +"\n\n_<<uuid : 자신에게 메시지를 보낸 사용자 중 한 명의 UUID 선택(send uuid)>>_\n\n"
             +"\n\n**_※ 참고_**"
             +"\n\n_get_send_me_uuid API가 정상적으로 호출 되어야 이 API도 정상 호출됨_"
             +"\n\n_스웨거에서 API 테스트 시, pageable 파라미터에서 sort 부분은 지우고 테스트 하기!_"
@@ -48,7 +48,9 @@ public class BoardController {
             +"\n\n_page : 현재 페이지 번호_"
             +"\n\n_size : 한 페이지 당 보여질 컨텐츠의 수_")
     @GetMapping("v1/messages-info/{uuid}")
-    public Page<MessageBoardDto> getSendMeBoardList(Pageable pageable, @PathVariable String uuid){
-        return messageBoardService.getMyBoardList(uuid, pageable);
+    public Page<MessageBoardDto> getSendMeBoardList(HttpSession session, Pageable pageable, @PathVariable String uuid){
+        String myUUID = (String) session.getAttribute("myUUID");
+        String sendUUID = uuid;
+        return messageBoardService.getMyBoardList(myUUID, sendUUID, pageable);
     }
 }
