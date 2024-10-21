@@ -28,7 +28,7 @@ public class MessageBoardServiceImpl implements MessageBoardService {
     }
 
     @Override
-    public Page<MessageBoardDto> getMyBoardList(String myUUID, Pageable pageable) {
-        return messageBoardJpaRepository.getMyBoardList(myUUID, pageable);
+    public Page<MessageBoardDto> getMyBoardList(String myUUID, String sendUUID, Pageable pageable) {
+        return messageBoardJpaRepository.getMyBoardList(myUUID, sendUUID, pageable);
     }
 }

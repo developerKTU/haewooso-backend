@@ -9,6 +9,6 @@ import java.util.*;
 public interface MessageBoardService {
 
     public List<String> getSendMeList(String myUUID);
-    public Page<MessageBoardDto> getMyBoardList(String myUUID, Pageable pageable);
+    public Page<MessageBoardDto> getMyBoardList(String myUUID, String sendUUID, Pageable pageable);
 
 }
