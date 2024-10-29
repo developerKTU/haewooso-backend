@@ -18,17 +18,12 @@ import java.util.List;
 @Component
 public class FCMConfig {
 
-    // 운영
     @Value("${FCMSDK}")
     private String FCMSDK;
 
     @Bean
     FirebaseMessaging firebaseMessaging() throws IOException {
-        // Local
-        //ClassPathResource resource = new ClassPathResource("firebase/haewooso-firebase-adminsdk-r1plg-b5fdea6348.json");
-        //InputStream refreshToken = resource.getInputStream();
 
-        // 운영
         InputStream refreshToken = new ByteArrayInputStream(FCMSDK.getBytes());
 
         FirebaseApp firebaseApp = null;
