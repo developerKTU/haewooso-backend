@@ -6,6 +6,7 @@ import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import com.ktu.haewooso_ver2.domain.pushMessage.SendMsg;
 import com.ktu.haewooso_ver2.dto.pushMessage.MessagePushDto;
+import com.ktu.haewooso_ver2.enums.board.SecretAt;
 import com.ktu.haewooso_ver2.repository.MessagePushRepository;
 import com.ktu.haewooso_ver2.service.pushMessage.FCMNotificationService;
 import jakarta.transaction.Transactional;
@@ -72,7 +73,7 @@ public class FCMNotificationServiceImpl implements FCMNotificationService {
     }
 
     @Override
-    public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto, String secretAt) {
+    public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto, SecretAt secretAt) {
         try{
             SendMsg sendMsg = SendMsg.builder()
                     .sendUuid(messagePushDto.getSendUuid())

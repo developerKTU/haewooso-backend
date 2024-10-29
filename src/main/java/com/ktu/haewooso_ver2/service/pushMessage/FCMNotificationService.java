@@ -1,6 +1,7 @@
 package com.ktu.haewooso_ver2.service.pushMessage;
 
 import com.ktu.haewooso_ver2.dto.pushMessage.MessagePushDto;
+import com.ktu.haewooso_ver2.enums.board.SecretAt;
 import org.springframework.http.ResponseEntity;
 
 public interface FCMNotificationService {
@@ -9,6 +10,6 @@ public interface FCMNotificationService {
     public String getRandomReceiverToken(String uuid);
     public String getReceiverUuid(String pushToken);
     public ResponseEntity<String> sendNotificationByToken(MessagePushDto messagePushDto, String randomReceiverToken);
-    public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto, String secretAt);
+    public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto, SecretAt secretAt);
 
 }

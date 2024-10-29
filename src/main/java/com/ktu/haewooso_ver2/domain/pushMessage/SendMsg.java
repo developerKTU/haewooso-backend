@@ -1,6 +1,7 @@
 package com.ktu.haewooso_ver2.domain.pushMessage;
 
 import com.ktu.haewooso_ver2.domain.member.Member;
+import com.ktu.haewooso_ver2.enums.board.SecretAt;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -25,7 +26,9 @@ public class SendMsg {
     private Member member;
 
     // 240930 랜덤푸시, 시크릿푸시 구분코드 추가
-    private String secretAt;
+    // 241029 랜덤, 시크릿 구분코드 ENUM으로 변경
+    @Enumerated(EnumType.STRING)
+    private SecretAt secretAt;
 
     // 연관관계 메서드
     // 메시지를 보낸 회원에게 해당 Message set
@@ -34,7 +37,7 @@ public class SendMsg {
     }
 
     @Builder
-    public SendMsg(String sendUuid, String receiveUuid, String title, String content, String secretAt){
+    public SendMsg(String sendUuid, String receiveUuid, String title, String content, SecretAt secretAt){
         this.sendUuid = sendUuid;
         this.receiveUuid = receiveUuid;
         this.title = title;
