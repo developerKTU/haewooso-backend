@@ -1,6 +1,7 @@
 package com.ktu.haewooso_ver2.controller.messageController;
 
 import com.ktu.haewooso_ver2.dto.pushMessage.MessagePushDto;
+import com.ktu.haewooso_ver2.enums.board.SecretAt;
 import com.ktu.haewooso_ver2.service.pushMessage.FCMNotificationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,7 +42,7 @@ public class MessagePushController {
         // 푸시알림 메시지 전송 성공 시, 보낸 푸시 알림 메시지 정보 insert
         if("200".equals(result)){
             // 시크릿 푸시 구분코드 생성 (랜덤 푸시 : R)
-            String secretAt = "R";
+            SecretAt secretAt = SecretAt.R;
             result = FCMNotificationService.insertMessageInfomation(messagePushDto, secretAt).getBody();
         }
 
