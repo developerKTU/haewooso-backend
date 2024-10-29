@@ -41,6 +41,8 @@ public class MemberController {
         session.setAttribute("myUUID", uuid);
         session.setMaxInactiveInterval(24 * 60 * 60);   // 세션 만료 시간을 24시간으로 설정
 
+        System.out.println("API :: 회원 접속일자 업데이트 API result STATE >> " + result);
+
         return result;
     }
 }
