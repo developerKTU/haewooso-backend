@@ -91,4 +91,15 @@ public class FCMNotificationServiceImpl implements FCMNotificationService {
         }
 
     }
+
+    // 241031 자동응답 기능을 위해 해당 uuid의 푸시토큰 조회
+    @Override
+    public String getPushToken(String uuid) {
+        try{
+            return messagePushRepository.findPushTokenByUuid(uuid);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<String>("400", HttpStatus.BAD_REQUEST).getBody();
+        }
+    }
 }
