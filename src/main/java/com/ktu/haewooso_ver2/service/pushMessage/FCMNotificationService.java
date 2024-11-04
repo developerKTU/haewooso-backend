@@ -12,4 +12,7 @@ public interface FCMNotificationService {
     public ResponseEntity<String> sendNotificationByToken(MessagePushDto messagePushDto, String randomReceiverToken);
     public ResponseEntity<String> insertMessageInfomation(MessagePushDto messagePushDto, SecretAt secretAt);
 
+    // 241031 자동응답 기능을 위해 랜덤 토큰 조회가 아닌, uuid를 조건으로한 해당 토큰 조회
+    public String getPushToken(String uuid);
+
 }

@@ -38,4 +38,11 @@ public class MessagePushRepository {
                 .setParameter("pushToken", pushToken)
                 .getSingleResult();
     }
+
+    // 241031 자동응답 기능을 위해 해당 uuid의 푸시토큰 조회
+    public String findPushTokenByUuid(String uuid){
+        return em.createQuery("select m.pushToken from Member m where m.uuid = :uuid", String.class)
+                .setParameter("uuid", uuid)
+                .getSingleResult();
+    }
 }
