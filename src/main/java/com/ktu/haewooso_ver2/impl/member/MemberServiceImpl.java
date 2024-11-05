@@ -2,6 +2,7 @@ package com.ktu.haewooso_ver2.impl.member;
 
 import com.ktu.haewooso_ver2.domain.member.Member;
 import com.ktu.haewooso_ver2.dto.member.MemberCreateDto;
+import com.ktu.haewooso_ver2.dto.member.MemberDto;
 import com.ktu.haewooso_ver2.repository.MemberRepository;
 import com.ktu.haewooso_ver2.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -57,5 +59,10 @@ public class MemberServiceImpl implements MemberService {
             e.printStackTrace();
             return new ResponseEntity<String>("400", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Override
+    public List<MemberDto> getMemberList() {
+        return memberRepository.findMemberList();
     }
 }

@@ -1,6 +1,7 @@
 package com.ktu.haewooso_ver2.controller.memberController;
 
 import com.ktu.haewooso_ver2.dto.member.MemberCreateDto;
+import com.ktu.haewooso_ver2.dto.member.MemberDto;
 import com.ktu.haewooso_ver2.service.member.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 @Tag(name="Haewooso Member API", description = "해우소 앱의 회원 관련 API 요청을 처리하는 Controller")
@@ -44,5 +46,11 @@ public class MemberController {
         System.out.println("API :: 회원 접속일자 업데이트 API result STATE >> " + result);
 
         return result;
+    }
+
+    @Operation(summary = "전체 회원 목록을 조회하는 API v1", description = "**어플을 사용하는 회원들의 목록을 조회하는 API**")
+    @GetMapping("v1/member-list")
+    public List<MemberDto> getMemberList(){
+        return memberService.getMemberList();
     }
 }
